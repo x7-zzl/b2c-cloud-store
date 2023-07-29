@@ -1,0 +1,45 @@
+# 配置网关
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: user-service  #路由规则的名称 只要不重复即可! 推荐写成服务名
+          uri: lb://user-service # 路径的服务名称
+          predicates:
+            - Path=/user/**  # 访问user路径转发用户服务
+        - id: product-service # 此名称随意定义
+          uri: lb://product-service #使用负载均衡,调用服务名,这是服务名
+          predicates:
+            - Path=/product/** # 访问product相关,转发到product服务
+        - id: static-service # 静态资源服务的转发规则
+          uri: lb://static-service #使用负载均衡,调用服务名,这是服务名
+          predicates:
+            - Path=/public/** # 访问product相关,转发到product服务
+        - id: carousel-service # 轮播图服务的转发规则
+          uri: lb://carousel-service #使用负载均衡,调用服务名,这是服务名
+          predicates:
+            - Path=/carousel/** # 访问product相关,转发到product服务
+        - id: category-service # 类别服务的转发规则
+          uri: lb://category-service #使用负载均衡,调用服务名,这是服务名
+          predicates:
+            - Path=/category/** # 访问类别相关,转发到类别服务
+        - id: search-service # 搜索服务的转发规则
+          uri: lb://search-service #使用负载均衡,调用服务名,这是服务名
+          predicates:
+            - Path=/search/** # 访问类别相关,转发到类别服务
+        - id: collect-service # 收藏服务的转发规则
+          uri: lb://collect-service #使用负载均衡,调用服务名,这是服务名
+          predicates:
+            - Path=/collect/** # 访问类别相关,转发到类别服务
+        - id: cart-service # 收藏服务的转发规则
+          uri: lb://cart-service #使用负载均衡,调用服务名,这是服务名
+          predicates:
+            - Path=/cart/** # 访问类别相关,转发到类别服务
+        - id: order-service # 收藏服务的转发规则
+          uri: lb://order-service #使用负载均衡,调用服务名,这是服务名
+          predicates:
+            - Path=/order/** # 访问类别相关,转发到类别服务
+        - id: admin-service  # 后台管理服务
+          uri: lb://admin-service
+          predicates:
+            - Path=/admin/**
